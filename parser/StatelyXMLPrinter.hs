@@ -20,7 +20,7 @@ import Control.Monad      ( when )
 
 import AbsStately   ()
 import LexStately   ( Token, mkPosToken )
-import ParStately   ( pExpr, myLexer )
+import ParStately   ( pListStm, myLexer )
 import PrintStately ( Print, printTree )
 import SkelStately  ()
 import XMLStately   ( XPrint, printXML )
@@ -33,7 +33,7 @@ putStrV :: Verbosity -> String -> IO ()
 putStrV v s = when (v > 1) $ putStrLn s
 
 runFile :: (XPrint a, Print a, Show a) => Verbosity -> ParseFun a -> FilePath -> IO ()
-runFile v p f =  readFile f >>= run v p
+runFile v p f = readFile f >>= run v p
 
 run :: (XPrint a, Print a, Show a) => Verbosity -> ParseFun a -> String -> IO ()
 run v p s =
@@ -45,6 +45,8 @@ run v p s =
       putStrLn err
       exitFailure
     Right tree -> do
+    --   putStrLn "\nParse Successful!"
+    --   showTree v tree
       putStrV v $ printXML tree
   where
   ts = myLexer s
@@ -70,7 +72,7 @@ main = do
   args <- getArgs
   case args of
     ["--help"] -> usage
-    []         -> getContents >>= run 2 pExpr
-    "-s":fs    -> mapM_ (runFile 0 pExpr) fs
-    fs         -> mapM_ (runFile 2 pExpr) fs
+    []         -> getContents >>= run 2 pListStm
+    "-s":fs    -> mapM_ (runFile 0 pListStm) fs
+    fs         -> mapM_ (runFile 2 pListStm) fs
 

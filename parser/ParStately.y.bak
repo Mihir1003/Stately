@@ -13,6 +13,7 @@ module ParStately
   , pExp
   , pVal
   , pBoolean
+  , pAction
   ) where
 
 import Prelude
@@ -27,6 +28,7 @@ import LexStately
 %name pExp Exp
 %name pVal Val
 %name pBoolean Boolean
+%name pAction Action
 -- no lexer declaration
 %monad { Err } { (>>=) } { return }
 %tokentype {Token}
@@ -71,9 +73,7 @@ Stm
   | '{' ListStm '}' { AbsStately.Block $2 }
   | 'while' '(' Exp ')' Stm { AbsStately.While $3 $5 }
   | 'if' '(' Exp ')' Stm 'else' Stm { AbsStately.If $3 $5 $7 }
-  | 'Wait(' Val ')' { AbsStately.AWait $2 }
-  | 'Fail()' { AbsStately.AFail }
-  | 'Succ()' { AbsStately.ASucc }
+  | Action { AbsStately.EAction $1 }
 
 Exp :: { AbsStately.Exp }
 Exp
@@ -89,6 +89,12 @@ Val
 Boolean :: { AbsStately.Boolean }
 Boolean
   : 'true' { AbsStately.BTrue } | 'false' { AbsStately.BFalse }
+
+Action :: { AbsStately.Action }
+Action
+  : 'Wait(' Val ')' { AbsStately.AWait $2 }
+  | 'Fail()' { AbsStately.AFail }
+  | 'Succ()' { AbsStately.ASucc }
 
 {
 

@@ -15,9 +15,7 @@ data Stm
     | Block [Stm]
     | While Exp Stm
     | If Exp Stm Stm
-    | AWait Val
-    | AFail
-    | ASucc
+    | EAction Action
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 data Exp = EVal Val | ETask Val Val
@@ -27,6 +25,9 @@ data Val = VString String | VNumber Integer | VBoolean Boolean
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 data Boolean = BTrue | BFalse
+  deriving (C.Eq, C.Ord, C.Show, C.Read)
+
+data Action = AWait Val | AFail | ASucc
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 newtype Ident = Ident String

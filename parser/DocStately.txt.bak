@@ -53,9 +53,7 @@ All other symbols are terminals.
   |  |  **|**  | ``{`` //[Stm]// ``}``
   |  |  **|**  | ``while`` ``(`` //Exp// ``)`` //Stm//
   |  |  **|**  | ``if`` ``(`` //Exp// ``)`` //Stm// ``else`` //Stm//
-  |  |  **|**  | ``Wait(`` //Val// ``)``
-  |  |  **|**  | ``Fail()``
-  |  |  **|**  | ``Succ()``
+  |  |  **|**  | //Action//
   | //Exp// | -> | //Val//
   |  |  **|**  | ``Task(`` //Val// ``)(`` //Val// ``)``
   | //Val// | -> | //String//
@@ -63,6 +61,9 @@ All other symbols are terminals.
   |  |  **|**  | //Boolean//
   | //Boolean// | -> | ``true``
   |  |  **|**  | ``false``
+  | //Action// | -> | ``Wait(`` //Val// ``)``
+  |  |  **|**  | ``Fail()``
+  |  |  **|**  | ``Succ()``
 
 
 

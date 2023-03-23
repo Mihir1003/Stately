@@ -163,6 +163,8 @@ async function main() {
         console.log(toState(actions[i]));
     }
 
+    
+
 
     // let sort = (node: Node) => {
     //     for (let i = 0; i< node.children.length; i++) {

@@ -1,15 +1,22 @@
-E. Expr   ::= Action "\n" Expr ;
-EAction. Expr   ::= Action;
-EVal. Expr   ::=  Val;
+[].  [Stm] ::= ;
+(:). [Stm] ::= Stm ";" [Stm] ;
+
+Assign. Stm ::= Ident "=" Exp ;
+Block.  Stm ::= "{" [Stm] "}" ;
+While.  Stm ::= "while" "(" Exp ")" Stm ;
+If.     Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
+
+EVal. Exp   ::=  Val;
+ETask. Exp ::= "Task(" Val ")(" Val ")" ;
+
+AWait. Stm ::= "Wait(" Val ")" ;
+AFail. Stm ::= "Fail()" ;
+ASucc. Stm ::= "Succ()" ;
+
 VString. Val ::= String ;
 VNumber.  Val ::= Integer ;
 VBoolean. Val ::= Boolean ;
 BTrue. Boolean ::= "true" ;
 BFalse. Boolean ::= "false" ;
-AWait. Action ::= "Wait(" Val ")" ;
-AFail. Action ::= "Fail()" ;
-ASucc. Action ::= "Succ()" ;
-ATask. Action ::= "Task(" Val ")(" Val ")" ;
-
 
 

@@ -25,9 +25,7 @@ transStm x = case x of
   AbsStately.Block stms -> failure x
   AbsStately.While exp stm -> failure x
   AbsStately.If exp stm1 stm2 -> failure x
-  AbsStately.AWait val -> failure x
-  AbsStately.AFail -> failure x
-  AbsStately.ASucc -> failure x
+  AbsStately.EAction action -> failure x
 
 transExp :: AbsStately.Exp -> Result
 transExp x = case x of
@@ -44,3 +42,9 @@ transBoolean :: AbsStately.Boolean -> Result
 transBoolean x = case x of
   AbsStately.BTrue -> failure x
   AbsStately.BFalse -> failure x
+
+transAction :: AbsStately.Action -> Result
+transAction x = case x of
+  AbsStately.AWait val -> failure x
+  AbsStately.AFail -> failure x
+  AbsStately.ASucc -> failure x

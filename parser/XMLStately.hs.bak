@@ -68,9 +68,7 @@ instance XPrint Stm where
    Block stms -> P.concat $  elemFun i' "Stm" "Block" : prt (i'+1) stms : [[P.replicate (i'+i') ' ' ++ endtag "Block" "Stm"]]
    While exp stm -> P.concat $  elemFun i' "Stm" "While" : prt (i'+1) exp : prt (i'+1) stm : [[P.replicate (i'+i') ' ' ++ endtag "While" "Stm"]]
    If exp stm0 stm -> P.concat $  elemFun i' "Stm" "If" : prt (i'+1) exp : prt (i'+1) stm0 : prt (i'+1) stm : [[P.replicate (i'+i') ' ' ++ endtag "If" "Stm"]]
-   AWait val -> P.concat $  elemFun i' "Stm" "AWait" : prt (i'+1) val : [[P.replicate (i'+i') ' ' ++ endtag "AWait" "Stm"]]
-   AFail  -> P.concat $  elemFun i' "Stm" "AFail"  : [[P.replicate (i'+i') ' ' ++ endtag "AFail" "Stm"]]
-   ASucc  -> P.concat $  elemFun i' "Stm" "ASucc"  : [[P.replicate (i'+i') ' ' ++ endtag "ASucc" "Stm"]]
+   EAction action -> P.concat $  elemFun i' "Stm" "EAction" : prt (i'+1) action : [[P.replicate (i'+i') ' ' ++ endtag "EAction" "Stm"]]
 
 instance XPrint Exp where
   prt i' = \case
@@ -87,5 +85,11 @@ instance XPrint Boolean where
   prt i' = \case
    BTrue  -> P.concat $  elemFun i' "Boolean" "BTrue"  : [[P.replicate (i'+i') ' ' ++ endtag "BTrue" "Boolean"]]
    BFalse  -> P.concat $  elemFun i' "Boolean" "BFalse"  : [[P.replicate (i'+i') ' ' ++ endtag "BFalse" "Boolean"]]
+
+instance XPrint Action where
+  prt i' = \case
+   AWait val -> P.concat $  elemFun i' "Action" "AWait" : prt (i'+1) val : [[P.replicate (i'+i') ' ' ++ endtag "AWait" "Action"]]
+   AFail  -> P.concat $  elemFun i' "Action" "AFail"  : [[P.replicate (i'+i') ' ' ++ endtag "AFail" "Action"]]
+   ASucc  -> P.concat $  elemFun i' "Action" "ASucc"  : [[P.replicate (i'+i') ' ' ++ endtag "ASucc" "Action"]]
 
 

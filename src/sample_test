@@ -1,3 +1,6 @@
-Task("5x")(4)
-Wait("1000")
-Fail()
+x = Task("5x")(4);
+if (4) {
+    Fail();
+    Wait(4);
+} else 
+    Wait(10);

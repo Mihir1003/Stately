@@ -12,12 +12,10 @@
 <!ATTLIST Ident value CDATA #REQUIRED>
 
 <!ELEMENT Assign ((Ident), (EVal| ETask))>
-<!ELEMENT Block ((Assign| Block| While| If| AWait| AFail| ASucc)*)>
-<!ELEMENT While ((EVal| ETask), (Assign| Block| While| If| AWait| AFail| ASucc))>
-<!ELEMENT If ((EVal| ETask), (Assign| Block| While| If| AWait| AFail| ASucc), (Assign| Block| While| If| AWait| AFail| ASucc))>
-<!ELEMENT AWait ((VString| VNumber| VBoolean))>
-<!ELEMENT AFail (EMPTY)>
-<!ELEMENT ASucc (EMPTY)>
+<!ELEMENT Block ((Assign| Block| While| If| EAction)*)>
+<!ELEMENT While ((EVal| ETask), (Assign| Block| While| If| EAction))>
+<!ELEMENT If ((EVal| ETask), (Assign| Block| While| If| EAction), (Assign| Block| While| If| EAction))>
+<!ELEMENT EAction ((AWait| AFail| ASucc))>
 
 <!ELEMENT EVal ((VString| VNumber| VBoolean))>
 <!ELEMENT ETask ((VString| VNumber| VBoolean), (VString| VNumber| VBoolean))>
@@ -28,6 +26,10 @@
 
 <!ELEMENT BTrue (EMPTY)>
 <!ELEMENT BFalse (EMPTY)>
+
+<!ELEMENT AWait ((VString| VNumber| VBoolean))>
+<!ELEMENT AFail (EMPTY)>
+<!ELEMENT ASucc (EMPTY)>
 
 
 ]>

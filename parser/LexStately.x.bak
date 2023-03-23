@@ -28,7 +28,7 @@ $u = [. \n]          -- universal: any character
 
 -- Symbols and non-identifier-like reserved words
 
-@rsyms = \; | \= | \{ | \} | \( | \) | "Task" \( | \) \( | "Wait" \( | "Fail" \( \) | "Succ" \( \)
+@rsyms = "Wait" \( | \) | "Fail" \( \) | "Succ" \( \) | "Task" \( | \) \(
 
 :-
 
@@ -152,13 +152,9 @@ eitherResIdent tv s = treeFind resWords
 -- | The keywords and symbols of the language organized as binary search tree.
 resWords :: BTree
 resWords =
-  b "Wait(" 9
-    (b "=" 5
-       (b ")(" 3 (b ")" 2 (b "(" 1 N N) N) (b ";" 4 N N))
-       (b "Succ()" 7 (b "Fail()" 6 N N) (b "Task(" 8 N N)))
-    (b "true" 13
-       (b "false" 11 (b "else" 10 N N) (b "if" 12 N N))
-       (b "{" 15 (b "while" 14 N N) (b "}" 16 N N)))
+  b "Task(" 5
+    (b "Fail()" 3 (b ")(" 2 (b ")" 1 N N) N) (b "Succ()" 4 N N))
+    (b "false" 7 (b "Wait(" 6 N N) (b "true" 8 N N))
   where
   b s n = B bs (TS bs n)
     where
