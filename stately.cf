@@ -1,0 +1,15 @@
+E. Expr   ::= Action "\n" Expr ;
+EAction. Expr   ::= Action;
+EVal. Expr   ::=  Val;
+VString. Val ::= String ;
+VNumber.  Val ::= Integer ;
+VBoolean. Val ::= Boolean ;
+BTrue. Boolean ::= "true" ;
+BFalse. Boolean ::= "false" ;
+AWait. Action ::= "Wait(" Val ")" ;
+AFail. Action ::= "Fail()" ;
+ASucc. Action ::= "Succ()" ;
+ATask. Action ::= "Task(" Val ")(" Val ")" ;
+
+
+
